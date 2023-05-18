@@ -25,8 +25,9 @@ public class TelegramBot extends TelegramLongPollingBot {
         List<BotCommand> listOfCommands = new ArrayList<>();
         listOfCommands.add(new BotCommand("/start", "Начало работы."));
         listOfCommands.add(new BotCommand("/help", "Помощь"));
+        listOfCommands.add(new BotCommand("/newTask", "Новая задача"));
         try {
-            this.execute(new SetMyCommands(listOfCommands, new BotCommandScopeDefault(), null));
+            this.execute(new SetMyCommands(listOfCommands, new BotCommandScopeDefault(), "en"));
         } catch (TelegramApiException e) {
             log.error("Error setting bot's command list: " + e.getMessage());
         }
@@ -56,6 +57,9 @@ public class TelegramBot extends TelegramLongPollingBot {
                 case "/help":
                     String msg = "Gjvjom";
                     sendMessage(chatId, msg);
+                    break;
+                case "/newTask":
+                    sendMessage(chatId, "msg");
                     break;
                 default:
                     sendMessage(chatId, "Извеняюсь, к сожалению я пока что не все умею.");
